@@ -4,8 +4,8 @@ sold_to_info = {
 
 
 ship_to_info = {
-    "csh_1": "PRD PCS NEWARK COMPOUNDING Covestro LLC 1111 O'Neill Drive, Hebron OH 43025-9409",
-    "csh_2": "PRD PCS NEWARK COMPOUNDING Covestro LLC 1113 O'Neill Drive Hebron OH 43025-9409",
+    "csh_1": "MAGA1",
+    "csh_2": "MAGA2",
 }
 
 

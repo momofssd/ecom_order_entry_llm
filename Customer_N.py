@@ -9,8 +9,8 @@ sold_to_info = {
 # }
 
 ship_to_info = {
-    "csh_1": "Transcare Logistics Corp RS (3P) CONTROL PLT - KTN CANADA 0047 400 LONGWOOD RD HAMILTON ON  L8P 4Z3 CANADA",
-    "csh_2": "Transcare Logistics Corp RS (3P), CONTROL PLT - KTN CANADA 0047 500 LONGWOOD RD HAMILTON ON  L8P 4Z3 CANADA",
+    "csh_1": "MAGA1",
+    "csh_2": "MAGA2",
 }
 
 

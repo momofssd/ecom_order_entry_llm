@@ -4,8 +4,8 @@ sold_to_info = {
 
 
 ship_to_info = {
-    "bsh_1": "BERRY GLOBAL FILMS, LLC SUB BERRY GLOBAL, INC 12900 S. PULASKI RD ALSIP IL 60805",
-    "bsh_2": "BERRY GLOBAL FILMS, LLC SUB BERRY GLOBAL, INC 12900 S. PULASKI RD ALSIP IL 60803",
+    "bsh_1": "MAGA1",
+    "bsh_2": "MAGA2",
 }
 
 
