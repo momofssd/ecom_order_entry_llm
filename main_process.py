@@ -128,7 +128,7 @@ if __name__ == "__main__":
         print("Not able to respond. Please select customer first.")
         sys.exit()
 
-    pdf_path = 'BERRY_PO_4290665.pdf'
+    pdf_path = ''
     final_info = process_and_refine_purchase_order(pdf_path)
 
     # Modify final_info after JSON payload creation
