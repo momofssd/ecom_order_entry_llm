@@ -3,10 +3,7 @@ sold_to_info = {
 }
 
 
-# ship_to_info2 = {
-#     "csh_1": "12323",
-#     "csh_2": "Traasdfsdfg",
-# }
+
 
 ship_to_info = {
     "csh_1": "MAGA1",
