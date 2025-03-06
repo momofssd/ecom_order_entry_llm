@@ -232,10 +232,4 @@ The API includes error handling for:
 - Processing errors
 - Invalid customer selections
 
-## License
 
-[Specify your license here]
-
-## Contributors
-
-[List contributors here]
