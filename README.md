@@ -17,19 +17,42 @@ A Flask-based API for extracting and processing purchase order information from 
 The application consists of several interconnected modules, each with specific responsibilities:
 
 ```mermaid
-%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '16px'}, 'flowchart': {'htmlLabels': true, 'curve': 'linear'}, 'height': 800 }}%%
-graph TD
+%%{init: {'theme': 'forest', 'themeVariables': { 'fontSize': '16px', 'fontFamily': 'arial', 'primaryColor': '#1f77b4', 'primaryTextColor': '#fff', 'primaryBorderColor': '#1f77b4', 'lineColor': '#1f77b4', 'secondaryColor': '#6c757d', 'tertiaryColor': '#f8f9fa'}, 'flowchart': {'htmlLabels': true, 'curve': 'basis', 'diagramPadding': 100, 'nodeSpacing': 200, 'rankSpacing': 300}}}%%
+graph TB
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef mainApp fill:#d4f1f9,stroke:#1f77b4,stroke-width:2px;
+    classDef pdfProc fill:#d5f5e3,stroke:#2ecc71,stroke-width:2px;
+    classDef llmProc fill:#fdebd0,stroke:#f39c12,stroke-width:2px;
+    classDef custLogic fill:#ebdef0,stroke:#8e44ad,stroke-width:2px;
     A[pdf.py] --> B[pdf_processing.py]
     A --> C[llm_processing.py]
     A --> D[Customer Modules]
     
+    %% Apply classes to nodes
+    class A mainApp;
+    class B,B1,B2 pdfProc;
+    class C,C1,C2,C3,C4 llmProc;
+    class D,D1,D2,D3,D4,D5,D6 custLogic;
+    
+    %% Add extra spacing nodes
+    B ~~~ BS1[" "]
+    BS1 ~~~ BS2[" "]
+    
     B --> B1[extract_text_from_pdf]
     B --> B2[split_text]
+    
+    %% Add extra spacing nodes
+    C ~~~ CS1[" "]
+    CS1 ~~~ CS2[" "]
     
     C --> C1[embed_and_store]
     C --> C2[retrieve_most_relevant_chunk_with_confidence]
     C --> C3[extract_information_with_llm]
     C --> C4[refine_extracted_information]
+    
+    %% Add extra spacing nodes
+    D ~~~ DS1[" "]
+    DS1 ~~~ DS2[" "]
     
     D --> D1[Customer_G.py]
     D --> D2[Customer_C.py]
