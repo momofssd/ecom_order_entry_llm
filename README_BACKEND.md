@@ -10,19 +10,41 @@ The PDF processing backend is a Flask-based web application that extracts and pr
 
 ```mermaid
 graph TD
-    A[APP.py] --> B[config.py]
-    A --> C[routes.py]
-    C --> D[pdf_factory.py]
-    D --> E[pdf_processing.py]
-    D --> F[llm_processing.py]
-    D --> G[utils.py]
-    C --> H[Customer Modules]
-    H --> H1[Customer_B.py]
-    H --> H2[Customer_C.py]
-    H --> H3[Customer_N.py]
-    H --> H4[Customer_G.py]
-    H --> H5[Customer_BA.py]
-    H --> H6[Customer_COM.py]
+    %% Main application components
+    APP[app.py<br/>Main Application] --> CONFIG[config.py<br/>Configuration]
+    APP --> ROUTES[routes.py<br/>API Endpoints]
+    
+    %% Processing pipeline
+    ROUTES --> FACTORY[pdf_factory.py<br/>Processing Orchestrator]
+    
+    %% PDF processing components
+    subgraph Processing_Components [Processing Components]
+        FACTORY --> PDF_PROC[pdf_processing.py<br/>Text Extraction]
+        FACTORY --> LLM_PROC[llm_processing.py<br/>LLM Integration]
+        FACTORY --> UTILS[utils.py<br/>Utility Functions]
+    end
+    
+    %% Customer modules
+    ROUTES --> CUSTOMERS[Customer Modules<br/>Customer-specific Logic]
+    
+    %% Individual customer implementations
+    subgraph Customer_Implementations [Customer Implementations]
+        CUSTOMERS --> CUST_B[Customer_B.py<br/>Berry]
+        CUSTOMERS --> CUST_C[Customer_C.py<br/>Commscope]
+        CUSTOMERS --> CUST_N[Customer_N.py<br/>Nexans]
+        CUSTOMERS --> CUST_G[Customer_G.py<br/>Galata]
+        CUSTOMERS --> CUST_BA[Customer_BA.py<br/>BASF]
+        CUSTOMERS --> CUST_COM[Customer_COM.py<br/>Commscope]
+    end
+    
+    %% Styling
+    classDef main fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef processing fill:#bbf,stroke:#333,stroke-width:1px;
+    classDef customers fill:#bfb,stroke:#333,stroke-width:1px;
+    
+    class APP,ROUTES,CONFIG main;
+    class FACTORY,PDF_PROC,LLM_PROC,UTILS processing;
+    class CUSTOMERS,CUST_B,CUST_C,CUST_N,CUST_G,CUST_BA,CUST_COM customers;
 ```
 
 ## Module Responsibilities
