@@ -17,6 +17,7 @@ A Flask-based API for extracting and processing purchase order information from 
 The application consists of several interconnected modules, each with specific responsibilities:
 
 ```mermaid
+%%{init: {'theme': 'default', 'themeVariables': { 'fontSize': '16px'}, 'flowchart': {'htmlLabels': true, 'curve': 'linear'}, 'height': 800 }}%%
 graph TD
     A[pdf.py] --> B[pdf_processing.py]
     A --> C[llm_processing.py]
@@ -182,6 +183,83 @@ The server will start on http://localhost:5000 by default.
    - Adding sold-to information
    - Processing deliver-to addresses
 9. **Response**: The structured information is returned as JSON
+
+## LLM Processing Details
+
+The application leverages Large Language Models (LLMs) and vector embeddings to intelligently extract information from purchase order documents. Here's a detailed explanation of how the LLM processing works:
+
+### Technology Stack
+
+- **Model**: Llama 3.1 (via Ollama)
+- **Vector Database**: FAISS (Facebook AI Similarity Search)
+- **Framework**: LangChain for orchestrating the LLM workflow
+
+### Embedding and Storage
+
+```python
+def embed_and_store(chunks):
+    embeddings = OllamaEmbeddings(model="llama3.1")
+    vectorstore = FAISS.from_texts(chunks, embedding=embeddings)
+    return vectorstore
+```
+
+1. Text chunks from the PDF are converted into numerical vector representations (embeddings) using the Llama 3.1 model
+2. These embeddings capture the semantic meaning of the text
+3. The embeddings are stored in a FAISS vector database, which enables efficient similarity searches
+
+### Relevant Text Retrieval
+
+```python
+def retrieve_most_relevant_chunk_with_confidence(vectorstore, query, threshold=0.8):
+    retrieved_docs_with_scores = vectorstore.similarity_search_with_score(query, k=5)
+    high_confidence_docs = [doc for doc, score in retrieved_docs_with_scores if score >= threshold]
+    combined_text = "\n".join([doc.page_content for doc in high_confidence_docs])
+    return combined_text
+```
+
+1. The system performs a similarity search against the vector database to find the most relevant text chunks
+2. It retrieves the top 5 most similar chunks along with their similarity scores
+3. Only chunks with a similarity score above the confidence threshold (default: 0.8) are kept
+4. The high-confidence chunks are combined into a single text block for processing
+
+### Information Extraction
+
+```python
+def extract_information_with_llm(retrieved_text, extract_prompt):
+    llm = OllamaLLM(model="llama3.1", temperature=0)
+    prompt = extract_prompt(retrieved_text)
+    response = llm.invoke(prompt)
+    return response
+```
+
+1. The Llama 3.1 model is initialized with temperature=0 for deterministic outputs
+2. The customer-specific extraction prompt is applied to the retrieved text
+3. The LLM processes the text and extracts the relevant purchase order information
+4. The extraction prompt guides the model to identify specific fields like PO number, quantities, dates, etc.
+
+### Information Refinement
+
+```python
+def refine_extracted_information(extracted_info, refine_prompt):
+    llm = OllamaLLM(model="llama3.1", temperature=0)
+    prompt = refine_prompt(extracted_info)
+    refined_response = llm.invoke(prompt)
+    return refined_response.strip()
+```
+
+1. The initially extracted information is passed through a refinement step
+2. A customer-specific refinement prompt is used to improve the extraction results
+3. This step helps standardize formats, correct errors, and ensure consistency
+4. The refined information is then returned for further processing
+
+### Confidence Scoring
+
+The system incorporates confidence scoring to ensure reliable information extraction:
+
+1. Vector similarity scores determine which text chunks are most relevant to the query
+2. Only chunks above the confidence threshold are used for information extraction
+3. This approach helps filter out irrelevant sections of the document
+4. The threshold can be adjusted based on the desired balance between precision and recall
 
 ## Extending for New Customers
 
