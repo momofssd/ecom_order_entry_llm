@@ -11,6 +11,7 @@ import Customer_C as Customer_C
 import Customer_N as Customer_N
 import Customer_B as Customer_B
 import Customer_BA as Customer_BA
+import Customer_COM as Customer_COM
 from pdf_processing import extract_text_from_pdf, split_text
 from llm_processing import embed_and_store, retrieve_most_relevant_chunk_with_confidence, extract_information_with_llm, refine_extracted_information
 
@@ -30,7 +31,7 @@ def allowed_file(filename):
 
 from difflib import SequenceMatcher
 
-def find_best_match(deliver_to, ship_info, threshold=0.2):
+def find_best_match(deliver_to, ship_info, threshold=0.3):
     best_match = None
     highest_ratio = 0.0
     for key, value in ship_info.items():
@@ -95,6 +96,7 @@ def process_purchase_order():
                 'B': Customer_B,
                 'G': Customer_G,
                 'BA': Customer_BA,
+                'COM':Customer_COM
             }
             
             module = customer_modules.get(customer.upper())
@@ -111,7 +113,7 @@ def process_purchase_order():
             
             query = "Purchase Order Number, Quantity in kg, Required Delivery Date, Material Number, deliver to"
             relevant_text = retrieve_most_relevant_chunk_with_confidence(vectorstore, query, threshold=0.8)
-            
+
             # Step 2: Initial Extraction
             initial_extracted_info = extract_information_with_llm(relevant_text, extract_prompt)
             print(f"\n--- Initial Extracted Information for {filename} (Step 1) ---")
@@ -132,6 +134,7 @@ def process_purchase_order():
             # Step 5: Add sold-to info and process deliver-to address
             refined_info_dict.update(module.sold_to_info)
             deliver_to_address = refined_info_dict.get("Deliver to", "")
+            print (deliver_to_address)
             ship_to_key = find_best_match(deliver_to_address, module.ship_to_info)
             
             if ship_to_key:
@@ -164,6 +167,7 @@ def get_customers():
         {'value': 'B', 'label': 'Customer B'},
         {'value': 'G', 'label': 'Customer G'},
         {'value': 'BA', 'label': 'Customer BA'},
+        {'value': 'COM', 'label': 'Customer COM'},
     ]
     return jsonify(customers)
 

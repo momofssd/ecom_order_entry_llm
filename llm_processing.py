@@ -2,7 +2,7 @@ from langchain_ollama import OllamaEmbeddings, OllamaLLM
 from langchain.vectorstores import FAISS
 
 def embed_and_store(chunks):
-    embeddings = OllamaEmbeddings(model="llama3.2")
+    embeddings = OllamaEmbeddings(model="llama3.1")
     vectorstore = FAISS.from_texts(chunks, embedding=embeddings)
     return vectorstore
 

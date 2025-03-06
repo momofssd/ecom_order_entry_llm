@@ -8,7 +8,6 @@ ship_to_info = {
     "bsh_2": "MAGA2",
 }
 
-
 def extract_prompt(retrieved_text):
     return f"""
     You are an expert at reading purchase orders. From the text below, extract **only the exact content** from the document without paraphrasing or summarizing.
@@ -31,9 +30,7 @@ def extract_prompt(retrieved_text):
       - The item number **should not be mistaken for quantities or order numbers**.
       - Typically, it is a **longer numeric value** and appears in a dedicated field.
       - **IGNORE values that are followed by "LB", "KG", or other weight units.** 
-    - **SHIP TO**: Extract the shipping address that starts with the facility name.
-      - **Do not include** contact details like phone numbers, emails, or names of people.
-      - Include the **company name, street address, city, state, and ZIP code**.
+        - **SHIP TO**: Extract the shipping address that starts with the facility name.Look for contents after "SHIP TO"
 
     **Important Extraction Rules:**
     - **DO NOT modify or summarize the content**—only extract exact values from the document.
@@ -67,4 +64,5 @@ def refine_prompt(extracted_info):
         "Deliver to": ""
     }}
     """
+
 
