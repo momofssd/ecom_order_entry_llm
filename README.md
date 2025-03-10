@@ -19,22 +19,25 @@ A modern React-based web application for managing purchase orders, order trackin
 ### 📸 Screenshots
 
 #### Login Page
-![image](https://github.com/user-attachments/assets/e544118b-42b8-4d09-94a5-259e4e9139c6)
+![image](https://github.com/user-attachments/assets/ddebc4af-e305-4c56-9d81-5a8970cbd3f1)
+
 
 
 #### Admin Dashboard
-![image](https://github.com/user-attachments/assets/628d83f4-15a9-4372-a52a-860f3442ef90)
+![image](https://github.com/user-attachments/assets/ec05952c-36cb-473f-abf6-c1b6d8c4ee53)
 
 
 #### Admin Purchase Order Upload
-![image](https://github.com/user-attachments/assets/ceb87eec-96b5-47da-9d22-27a56d14514e)
+![image](https://github.com/user-attachments/assets/810a94f1-df9b-41c0-94a5-d011fb5b10c5)
+
+![image](https://github.com/user-attachments/assets/571f28bf-0230-42ef-8a49-fb169cd86118)
 
 
-####  Admin Purchase Order Upload Process
-![image](https://github.com/user-attachments/assets/d942b41a-ff8d-43bf-ad7c-f8b0dfc7f89d)
+#### Admin Purchase Order Upload via openai
+![image](https://github.com/user-attachments/assets/40ba2bfb-54da-4f49-86b8-0616de7a7640)
 
-####  Non-Admin Order Upload
-![image](https://github.com/user-attachments/assets/632afb73-7f80-485e-bf38-7e4c95b48010)
+#### None Admin Purchase Order Upload 
+![image](https://github.com/user-attachments/assets/5803d1a0-731b-4321-ae6c-46925dbf3f31)
 
 
 ### 🚀 Features
