@@ -1,0 +1,87 @@
+/* Custom styles for POuploadAdmin component */
+
+/* Make table text smaller and more compact */
+.small-text {
+  font-size: 0.85rem;
+}
+
+/* Reduce padding in table cells */
+.small-text td, 
+.small-text th {
+  padding: 0.3rem 0.5rem !important;
+  white-space: nowrap;
+}
+
+/* Ensure table takes full width */
+.table-responsive {
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Adjust column widths */
+.small-text th:nth-child(1) { /* File Name */
+  min-width: 50px;
+}
+
+.small-text th:nth-child(2) { /* Sold to */
+  min-width: 120px;
+}
+
+.small-text th:nth-child(3) { /* Deliver to */
+  min-width: 100px;
+}
+
+.small-text th:nth-child(4) { /* Purchase Order Number */
+  min-width: 120px;
+}
+
+.small-text th:nth-child(5) { /* Required Delivery Date */
+  min-width: 120px;
+}
+
+.small-text th:nth-child(6) { /* Material Number */
+  min-width: 120px;
+}
+
+.small-text th:nth-child(7) { /* Quantity */
+  min-width: 80px;
+}
+
+.small-text th:nth-child(8) { /* Unit of Measure */
+  min-width: 80px;
+}
+
+/* Ensure buttons in table are compact */
+.small-text button {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* Prevent text wrapping in table cells */
+.small-text td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Add horizontal scrolling for very wide tables */
+.table-responsive {
+  scrollbar-width: thin;
+}
+
+/* Custom scrollbar styling for better visibility */
+.table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
